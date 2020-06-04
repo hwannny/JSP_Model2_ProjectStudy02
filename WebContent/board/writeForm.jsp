@@ -6,23 +6,15 @@
 <script src="<%=project%>script.js"></script>
 
 <h2> <%=page_write%> </h2>
-<%
-	// 제목글인 경우 - list.jsp에서 넘어온 경우
-	int num = 0;			// 글번호 X / 제목글 0 답글 ! 0
-	int ref = 1;			// 그룹화아이디
-	int re_step = 0;		// 글순서
-	int re_level = 0;		// 글레벨
-	
-	if( request.getParameter( "num" ) != null ) {
-		// 답글인 경우 - content.jsp에서 넘어온 경우
-		num = Integer.parseInt( request.getParameter( "num" ) );
-		ref = Integer.parseInt( request.getParameter( "ref" ) ); 
-		re_step = Integer.parseInt( request.getParameter( "re_step" ) );
-		re_level = Integer.parseInt( request.getParameter( "re_level" ) );
-	}
-%>
 
-<form method="post" action="writePro.jsp" name="writeform"
+	<%
+	int num = (Integer)request.getAttribute("num");
+	int ref = (Integer)request.getAttribute("ref");
+	int re_step = (Integer)request.getAttribute("re_step");
+	int re_level = (Integer)request.getAttribute("re_level");	
+	%>
+
+<form method="post" action="writePro.do" name="writeform"
 	onsubmit="return writecheck()">
 	<input type="hidden" name="num" value="<%=num%>">
 	<input type="hidden" name="ref" value="<%=ref%>">
@@ -32,7 +24,7 @@
 	<table>
 		<tr>
 			<td colspan="2" align="right">
-				<a href="list.jsp"><%=str_list%></a>&nbsp;&nbsp;&nbsp;
+				<a href="list.do"><%=str_list%></a>&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr> 
@@ -70,7 +62,7 @@
 				<input class="inputbutton" type="submit" value="<%=btn_write%>">
 				<input class="inputbutton" type="reset" value="<%=btn_cancel%>">
 				<input class="inputbutton" type="button" value="<%=btn_list%>"
-					onclick="location='list.jsp'">
+					onclick="location='list.do'">
 			</th>
 		</tr>
 	</table>	
